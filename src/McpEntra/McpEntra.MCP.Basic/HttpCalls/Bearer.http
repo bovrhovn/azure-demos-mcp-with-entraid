@@ -1,0 +1,20 @@
+### Get Random Number
+@token =""
+
+POST {{url}}/mcp
+Accept: application/json, text/event-stream
+Content-Type: application/json
+Authorization: Bearer {{token}}
+MCP-Protocol-Version: 2025-11-25
+
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+        "name": "get_random_number"
+    }
+}
+
+### CHECK HEALTH
+GET {{url}}/health

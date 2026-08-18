@@ -9,6 +9,6 @@ builder.Services
     .WithTools<RandomNumberTools>();
 
 var app = builder.Build();
-app.MapMcp();
+app.MapMcp("/mcp");
 
 app.Run();

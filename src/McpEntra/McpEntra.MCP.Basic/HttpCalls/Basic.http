@@ -1,6 +1,6 @@
 ## Get Random Number
 
-POST {{url}}/
+POST {{url}}/mcp
 Accept: application/json, text/event-stream
 Content-Type: application/json
 MCP-Protocol-Version: 2025-11-25

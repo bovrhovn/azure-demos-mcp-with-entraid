@@ -19,7 +19,6 @@ public sealed class McpAuthHandler(TokenCredential credential) : DelegatingHandl
             ]),
             cancellationToken);
         var currentAuthToken = token.Token;
-        AnsiConsole.MarkupLine($"[blue]Using MCP API Token: {Markup.Escape(currentAuthToken)}[/]");
         request.Headers.Authorization =
             new AuthenticationHeaderValue(
                 "Bearer",

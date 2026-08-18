@@ -51,7 +51,12 @@ foreach (var tool in mcpTools)
         $"  [yellow]{Markup.Escape(tool.Name)}[/] - {Markup.Escape(tool.Description ?? "No description")}");
 }
 
-AIAgent agent = new AIProjectClient(new Uri(projectEndpoint, UriKind.Absolute), new DefaultAzureCredential())
+AIAgent agent = new AIProjectClient(new Uri(projectEndpoint, UriKind.Absolute), 
+        new DefaultAzureCredential(new DefaultAzureCredentialOptions
+        {
+            ExcludeVisualStudioCredential = true,
+            ExcludeAzureCliCredential = false
+        }))
     .AsAIAgent(
         model: deploymentName,
         name: "McpEntraCliAgent",

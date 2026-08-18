@@ -200,6 +200,18 @@ dotnet publish "src\McpEntra\McpEntra.MCP.Basic\McpEntra.MCP.Basic.csproj" `
 
 Configured targets include Windows, macOS, glibc Linux, and musl Linux variants.
 
+### Build a container in Azure Container Registry
+
+The Dockerfile uses `src\McpEntra\McpEntra.MCP.Basic` as its build context. Run the ACR build from the repository root:
+
+```powershell
+az acr build `
+    --registry <registry-name> `
+    --image mcp-entra:latest `
+    --file Dockerfile `
+    "src\McpEntra\McpEntra.MCP.Basic"
+```
+
 ## Entra ID roadmap
 
 The intended destination is an Azure-hosted MCP API protected by Microsoft Entra ID:

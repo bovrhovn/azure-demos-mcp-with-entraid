@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Microsoft.AspNetCore.Authorization;
 using ModelContextProtocol.Server;
 
 namespace McpEntra.MCP.Basic.Tools;
@@ -7,6 +8,7 @@ namespace McpEntra.MCP.Basic.Tools;
 /// Sample MCP tools for demonstration purposes.
 /// These tools can be invoked by MCP clients to perform various operations.
 /// </summary>
+[AllowAnonymous]
 internal class RandomNumberTools(ILogger<RandomNumberTools> logger)
 {
     [McpServerTool]

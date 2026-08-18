@@ -16,3 +16,6 @@ MCP-Protocol-Version: 2025-11-25
 
 ### CHECK HEALTH
 GET {{url}}/health
+
+### GET Well-Known
+GET {{url}}/.well-known/oauth-authorization-server

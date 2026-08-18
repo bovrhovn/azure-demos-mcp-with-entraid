@@ -1,6 +1,8 @@
 ﻿using Azure.AI.Projects;
 using Azure.Identity;
+using McpEntra.MCP.CliClient;
 using Microsoft.Agents.AI;
+using ModelContextProtocol.Authentication;
 using ModelContextProtocol.Client;
 using Spectre.Console;
 
@@ -26,14 +28,18 @@ Console.CancelKeyPress += (_, eventArgs) =>
     cancellationTokenSource.Cancel();
 };
 
+var credential = new DefaultAzureCredential();
+var httpClient = new HttpClient(
+    new McpAuthHandler(credential) { InnerHandler = new HttpClientHandler() });
+
 await using var mcpClient = await McpClient.CreateAsync(
-    new HttpClientTransport(new HttpClientTransportOptions
-    {
-        Endpoint = new Uri(url, UriKind.Absolute),
-        Name = "McpEntra",
-        TransportMode = HttpTransportMode.StreamableHttp,
-    }),
-    cancellationToken: cancellationTokenSource.Token);
+    new HttpClientTransport(
+        new HttpClientTransportOptions
+        {
+            Endpoint = new Uri(url),
+            Name = "McpEntra",
+            TransportMode = HttpTransportMode.StreamableHttp
+        }, httpClient));
 
 var mcpTools = await mcpClient.ListToolsAsync(
     cancellationToken: cancellationTokenSource.Token);

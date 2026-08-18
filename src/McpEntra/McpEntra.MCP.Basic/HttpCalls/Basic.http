@@ -1,4 +1,4 @@
-## Get Random Number
+### Get Random Number
 
 POST {{url}}/mcp
 Accept: application/json, text/event-stream
@@ -13,3 +13,6 @@ MCP-Protocol-Version: 2025-11-25
         "name": "get_random_number"
     }
 }
+
+### CHECK HEALTH
+GET {{url}}/health

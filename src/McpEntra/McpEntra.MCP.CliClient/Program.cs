@@ -8,14 +8,14 @@ using Spectre.Console;
 
 AnsiConsole.MarkupLine("[violet]Calling the MCP Entra CLI Client...[/]");
 var url = Environment.GetEnvironmentVariable("MCP_URL") ?? "http://localhost:7777/mcp";
-AnsiConsole.MarkupLine($"[blue]Using MCP URL: {Markup.Escape(url.ToString())}[/]");
+AnsiConsole.MarkupLine($"[blue]Using MCP URL: {Markup.Escape(url)}[/]");
 
 var deploymentName = Environment.GetEnvironmentVariable("MCP_DEPLOYMENT_NAME") ?? "gpt-5.4";
 AnsiConsole.MarkupLine($"[blue]Using Azure Foundry Deployment Name: {Markup.Escape(deploymentName)}[/]");
 
 var projectEndpoint = Environment.GetEnvironmentVariable("AZURE_AI_PROJECT_ENDPOINT");
 ArgumentException.ThrowIfNullOrEmpty(projectEndpoint, "AZURE_AI_PROJECT_ENDPOINT environment variable is required.");
-AnsiConsole.MarkupLine($"[blue]Using Azure Foundry Project Endpoint: {Markup.Escape(projectEndpoint.ToString())}[/]");
+AnsiConsole.MarkupLine($"[blue]Using Azure Foundry Project Endpoint: {Markup.Escape(projectEndpoint)}[/]");
 
 #endregion
 

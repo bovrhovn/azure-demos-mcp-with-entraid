@@ -5,10 +5,9 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["McpEntra.MCP.WebClient.csproj", "McpEntra.MCP.WebClient/"]
-RUN dotnet restore "McpEntra.MCP.WebClient/McpEntra.MCP.WebClient.csproj"
+COPY ["McpEntra.MCP.WebClient.csproj", "."]
+RUN dotnet restore "McpEntra.MCP.WebClient.csproj"
 COPY . .
-WORKDIR "/src/McpEntra.MCP.WebClient"
 RUN dotnet build "./McpEntra.MCP.WebClient.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="McpEntra.MCP.Basic/McpEntra.MCP.Basic.csproj" />
   <Project Path="McpEntra.MCP.CliClient/McpEntra.MCP.CliClient.csproj" />
+  <Project Path="McpEntra.MCP.ClientOBO/McpEntra.MCP.ClientOBO.csproj" />
 </Solution>

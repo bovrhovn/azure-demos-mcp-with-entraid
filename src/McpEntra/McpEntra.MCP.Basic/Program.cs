@@ -18,6 +18,7 @@ builder.Services.AddAuthorization();
 builder.Services
     .AddMcpServer()
     .WithHttpTransport(options => { options.Stateless = true; })
+    .WithTools<ProtectedServiceTools>()
     .WithTools<RandomNumberTools>();
 
 var app = builder.Build();

@@ -1,12 +1,11 @@
-﻿using Azure.AI.Projects;
+﻿#region Environment Variables
+
+using Azure.AI.Projects;
 using Azure.Identity;
 using McpEntra.MCP.CliClient;
 using Microsoft.Agents.AI;
-using ModelContextProtocol.Authentication;
 using ModelContextProtocol.Client;
 using Spectre.Console;
-
-#region Environment Variables
 
 AnsiConsole.MarkupLine("[violet]Calling the MCP Entra CLI Client...[/]");
 var url = Environment.GetEnvironmentVariable("MCP_URL") ?? "http://localhost:7777/mcp";

@@ -25,10 +25,12 @@ builder.Services.AddOptions<AIOptions>()
 
 #endregion
 
-builder.Services.Configure<ForwardedHeadersOptions>(options=>
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
                                ForwardedHeaders.XForwardedProto;
+    options.KnownProxies.Clear();
+    options.KnownIPNetworks.Clear();
 });
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
@@ -39,16 +41,19 @@ builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
-{
+app.UseForwardedHeaders();
+
+if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
+else
+{
+    app.UseHttpsRedirection();
     app.UseExceptionHandler("/Info/Error");
 }
 
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseForwardedHeaders();
 app.UseStaticFiles();
 app.MapRazorPages();
 app.Run();

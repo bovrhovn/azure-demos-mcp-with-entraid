@@ -40,7 +40,9 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownIPNetworks.Clear();
 });
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi()
+    .AddInMemoryTokenCaches();
 builder.Services.AddAuthorization(options => { options.FallbackPolicy = options.DefaultPolicy; });
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
         options.Conventions.AddPageRoute("/Info/Index", ""))
@@ -48,6 +50,7 @@ builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
 
 #endregion
 
+builder.Services.AddHttpClient(McpService.HttpClientName);
 builder.Services.AddScoped<McpService>();
 builder.Services.AddScoped<ChatService>();
 

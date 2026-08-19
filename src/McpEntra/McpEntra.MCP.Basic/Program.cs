@@ -51,13 +51,10 @@ app.MapGet("/.well-known/oauth-authorization-server", (HttpContext ctx) =>
         {
             issuer =
                 $"https://login.microsoftonline.com/{tenantId}/v2.0",
-
             authorization_endpoint =
                 $"https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize",
-
             token_endpoint =
                 $"https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
-
             jwks_uri =
                 $"https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys"
         });

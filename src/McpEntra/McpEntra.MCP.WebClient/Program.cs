@@ -11,10 +11,19 @@ builder.Services.AddTransient<ILogger>(p =>
     var loggerFactory = p.GetRequiredService<ILoggerFactory>();
     return loggerFactory.CreateLogger("MCP WebClient for Entra protected resources");
 });
+
+#region Options
+
 builder.Services.AddOptions<McpOptions>()
     .Bind(builder.Configuration.GetSection(McpOptions.SectionName))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+builder.Services.AddOptions<AIOptions>()
+    .Bind(builder.Configuration.GetSection(AIOptions.SectionName))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+#endregion
 
 builder.Services.Configure<ForwardedHeadersOptions>(options=>
 {

@@ -1,8 +1,11 @@
 using McpEntra.MCP.WebClient.Options;
+using McpEntra.MCP.WebClient.Services;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+
+#region Basic settings
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(settings => settings.AddServerHeader = false);
@@ -11,6 +14,8 @@ builder.Services.AddTransient<ILogger>(p =>
     var loggerFactory = p.GetRequiredService<ILoggerFactory>();
     return loggerFactory.CreateLogger("MCP WebClient for Entra protected resources");
 });
+
+#endregion
 
 #region Options
 
@@ -25,6 +30,8 @@ builder.Services.AddOptions<AIOptions>()
 
 #endregion
 
+#region Authentication & Authorization
+
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
@@ -38,6 +45,11 @@ builder.Services.AddAuthorization(options => { options.FallbackPolicy = options.
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
         options.Conventions.AddPageRoute("/Info/Index", ""))
     .AddMicrosoftIdentityUI();
+
+#endregion
+
+builder.Services.AddScoped<McpService>();
+builder.Services.AddScoped<ChatService>();
 
 var app = builder.Build();
 

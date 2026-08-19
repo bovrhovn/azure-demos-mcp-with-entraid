@@ -31,7 +31,7 @@ var pca = PublicClientApplicationBuilder
 
 var result = await pca.AcquireTokenInteractive(
     [
-        $"api://{mcpClientId}/Mcp.Access"
+        $"api://{mcpClientId}/MCP.Access"
     ])
     .ExecuteAsync();
 

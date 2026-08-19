@@ -1,6 +1,127 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "MCP web client";
 }
 
+<div class="mcp-page mcp-home-page">
+    <header class="mcp-home-hero mb-4 mb-lg-5">
+        <div class="mcp-home-hero-content">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="mcp-brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="3.2" />
+                        <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" />
+                    </svg>
+                </div>
+                <p class="mcp-overline mb-0">Microsoft Entra ID + Model Context Protocol</p>
+            </div>
+            <h1 class="mcp-home-title">A protected workspace for AI and MCP tools.</h1>
+            <p class="mcp-home-intro mb-0">
+                This web client demonstrates how a signed-in user can discover MCP capabilities and work with
+                an AI assistant through a Microsoft Entra ID-protected application.
+            </p>
+        </div>
+        <div class="mcp-home-orbit" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <i></i>
+        </div>
+    </header>
+
+    <section class="mb-4 mb-lg-5" aria-labelledby="getting-started-heading">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-end gap-2 mb-3">
+            <div>
+                <p class="mcp-overline mb-1">Get started</p>
+                <h2 class="mcp-section-title mb-0" id="getting-started-heading">Choose a workspace</h2>
+            </div>
+            <span class="text-secondary small">Two ways to explore the demo</span>
+        </div>
+
+        <div class="row g-3 g-lg-4">
+            <div class="col-lg-6">
+                <a asp-page="/MCP/Index" class="mcp-home-action-card mcp-home-action-card-tools">
+                    <span class="mcp-home-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="3.2" />
+                            <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" />
+                        </svg>
+                    </span>
+                    <span class="mcp-home-action-copy">
+                        <span class="mcp-overline">MCP workspace</span>
+                        <strong>Explore available tools</strong>
+                        <span>Review the MCP endpoint connection and the tools it makes available to AI workflows.</span>
+                    </span>
+                    <span class="mcp-home-action-arrow" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a asp-page="/MCP/CallAI" class="mcp-home-action-card mcp-home-action-card-chat">
+                    <span class="mcp-home-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M5 18.5A8.5 8.5 0 1 1 19 18.5" />
+                            <path d="M8 15h.01M12 12h.01M16 15h.01" stroke-linecap="round" stroke-width="2.5" />
+                        </svg>
+                    </span>
+                    <span class="mcp-home-action-copy">
+                        <span class="mcp-overline">AI assistant</span>
+                        <strong>Start a conversation</strong>
+                        <span>Send a focused prompt to the configured AI service and review its response in one place.</span>
+                    </span>
+                    <span class="mcp-home-action-arrow" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mcp-home-about" aria-labelledby="about-project-heading">
+        <div class="card-body p-4 p-lg-5">
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-4">
+                    <p class="mcp-overline mb-1">About this project</p>
+                    <h2 class="mcp-section-title mb-0" id="about-project-heading">Built for protected AI workflows</h2>
+                </div>
+                <div class="col-lg-8">
+                    <p class="mcp-home-about-copy">
+                        The sample combines a stateless .NET MCP server, Microsoft Entra ID authentication,
+                        and Microsoft Foundry-ready AI experiences. It shows how users and AI clients can
+                        securely discover and invoke MCP tools.
+                    </p>
+                    <div class="row g-3 mt-1">
+                        <div class="col-sm-4">
+                            <div class="mcp-home-feature">
+                                <span class="mcp-home-feature-number">01</span>
+                                <span>Entra ID<br />sign-in</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mcp-home-feature">
+                                <span class="mcp-home-feature-number">02</span>
+                                <span>Stateless MCP<br />transport</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mcp-home-feature">
+                                <span class="mcp-home-feature-number">03</span>
+                                <span>AI-ready<br />tool discovery</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/mcp-experience.css" asp-append-version="true" />
+}

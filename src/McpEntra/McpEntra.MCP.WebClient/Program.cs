@@ -1,11 +1,11 @@
+#region Basic settings
+
 using McpEntra.MCP.WebClient.Options;
 using McpEntra.MCP.WebClient.Services;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-
-#region Basic settings
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(settings => settings.AddServerHeader = false);
@@ -39,10 +39,10 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownProxies.Clear();
     options.KnownIPNetworks.Clear();
 });
+
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
-    .EnableTokenAcquisitionToCallDownstreamApi()
-    .AddInMemoryTokenCaches();
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+
 builder.Services.AddAuthorization(options => { options.FallbackPolicy = options.DefaultPolicy; });
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
         options.Conventions.AddPageRoute("/Info/Index", ""))

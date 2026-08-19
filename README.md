@@ -192,18 +192,20 @@ The web project binds `AzureAd`, `Mcp`, and `AI` settings. Configure a web-app r
 ```powershell
 $env:AzureAd__TenantId = "<tenant-id>"
 $env:AzureAd__ClientId = "<web-client-app-id>"
-$env:AzureAd__ClientSecret = "<web-client-secret>"
 $env:Mcp__BaseUrl = "http://localhost:7777/mcp"
+$env:Mcp__McpApiUrl = "api://<api-app-id>/MCP.Access"
 $env:AI__DeploymentName = "<deployment-name>"
 $env:AI__ProjectUrl = "https://<resource>.services.ai.azure.com/api/projects/<project>"
 
 dotnet run --project "src\McpEntra\McpEntra.MCP.WebClient\McpEntra.MCP.WebClient.csproj" --urls https://localhost:5001
 ```
 
-Register `https://localhost:5001/signin-oidc` in the web-client app registration when using the command above. Use the equivalent public HTTPS URL after deployment. Keep the client secret in user secrets, a secret store, or a managed identity-based deployment configuration--not in `appsettings.json`.
+Register `https://localhost:5001/signin-oidc` in the web-client app registration when using the command above. Use the equivalent public HTTPS URL after deployment.
+
+The web client uses a system-assigned managed identity as a certificate-less client credential. Enable that identity on the Azure host and add a federated credential to the web-client app registration with issuer `https://login.microsoftonline.com/<tenant-id>/v2.0`, the managed identity principal ID as its subject, and audience `api://AzureADTokenExchange`. For a user-assigned managed identity, set `AzureAd__ClientCredentials__0__ManagedIdentityClientId` to that identity's client ID.
 
 > [!NOTE]
-> The web client currently demonstrates authenticated pages and configuration only. `McpService` returns sample tool data and `ChatService` returns a simulated response; neither service calls the configured MCP endpoint or Foundry project yet.
+> The web client acquires a delegated token for `Mcp:McpApiUrl` and calls the configured MCP endpoint to discover its tools. `ChatService` returns a simulated response and does not call the Foundry project yet.
 
 ## Call the MCP server directly
 
